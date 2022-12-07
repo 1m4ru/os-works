@@ -4,6 +4,7 @@
  */
 package br.com.osworks.api.exceptionhandler;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.Data;
@@ -13,6 +14,7 @@ import lombok.Data;
  * @author 1m4ru
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Problema {
     
     

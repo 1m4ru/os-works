@@ -6,6 +6,7 @@ package br.com.osworks.controller;
 
 import br.com.osworks.domain.model.Cliente;
 import br.com.osworks.domain.repository.ClienteRepository;
+import br.com.osworks.domain.service.CadastroClienteService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -33,6 +34,9 @@ public class ClienteController {
     
     @Autowired
     private  ClienteRepository clienteRepository;
+    
+    @Autowired
+    private CadastroClienteService cadastroClienteService;
             
     @GetMapping
     public List<Cliente> listar(){
@@ -50,20 +54,20 @@ public class ClienteController {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente adicionar(@Valid @RequestBody Cliente cliente){
-        return clienteRepository.save(cliente);
+    public Cliente adicionar(@Valid @RequestBody Cliente cliente) throws Exception{
+        return cadastroClienteService.salvar(cliente);
     }
     
     @PutMapping("/{clienteId}")
     public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, 
-            @RequestBody Cliente cliente){
+            @RequestBody Cliente cliente) throws Exception{
         
         if(clienteRepository.existsById(clienteId)){
             return ResponseEntity.notFound().build();
         }
         
         cliente.setId(clienteId);
-        clienteRepository.save(cliente);
+        cadastroClienteService.salvar(cliente);
         return ResponseEntity.ok(cliente);
     }
     
@@ -72,7 +76,7 @@ public class ClienteController {
         if(clienteRepository.existsById(clienteId)){
             return ResponseEntity.notFound().build();
         }
-        clienteRepository.deleteById(clienteId);
+        cadastroClienteService.excluir(clienteId);
         return ResponseEntity.noContent().build();
     }
     
