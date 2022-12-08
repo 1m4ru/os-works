@@ -6,6 +6,7 @@ package br.com.osworks.controller;
 
 import br.com.osworks.domain.model.OrdemServico;
 import br.com.osworks.domain.service.GestaoOrdemServicoService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class OrdemServicoControler {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrdemServico criar(@RequestBody OrdemServico ordemServico){
+    public OrdemServico criar(@Valid @RequestBody OrdemServico ordemServico){
         return gestaoOrdemServico.criar(ordemServico);
     }
     

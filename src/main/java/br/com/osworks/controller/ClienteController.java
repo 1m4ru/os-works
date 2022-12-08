@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 1m4ru
  */
 @RestController
-@RequestMapping
+@RequestMapping("/clientes")
 public class ClienteController {
   
     
